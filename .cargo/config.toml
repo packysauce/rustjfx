@@ -1,2 +1,2 @@
 [build]
-rustflags = ["--emit=llvm-ir"]
+rustflags = ["--emit=llvm-bc"]

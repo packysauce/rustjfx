@@ -6,19 +6,23 @@
 	"build": {
 		"dockerfile": "Dockerfile"
 	},
+	"mounts": [
+		"type=bind,source=/etc/localtime,target=/etc/localtime,readonly=true"
+	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"GitHub.copilot-nightly",
+				"GitHub.copilot-labs"
+			]
+		}
+	}
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
-
-	"remoteEnv": {
-		"PATH": "${containerEnv:JAVA_HOME}/bin:${containerEnv:LLVM_TOOLCHAIN}/bin:${containerEnv:PATH}"
-	}
-
-	// Configure tool-specific properties.
-	// "customizations": {},
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
