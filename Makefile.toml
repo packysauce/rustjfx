@@ -1,0 +1,19 @@
+
+[tasks.post-build]
+script = '''
+set -x
+exe=target/debug/main
+bc="$(find target/debug/deps -samefile $exe).bc"
+# now all we have to do is objcopy!
+objcopy \
+    --add-section .llvmbc=$bc \
+    --set-section-flags .llvmbc=noload,contents,data,readonly \
+    $exe
+'''
+
+# we need to run cargo first, then we need to run objcopy for putting the .bc
+# files into the sections
+# hence, override the default build task
+
+[tasks.end]
+# Runs after any make tasks, lets use it to stitch together all the .bc files to whatever we built
