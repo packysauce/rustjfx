@@ -1,0 +1,7 @@
+{
+  "editor.formatOnSave": true,
+  "shellcheck.enableQuickFix": true,
+  "shellcheck.customArgs": [
+    "--external-sources",
+  ]
+}
