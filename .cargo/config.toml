@@ -1,9 +1,12 @@
-[build]
+
 # https://github.com/rust-lang/rust/issues/84395
 # using the unstable flag emit-thin-lto=no allows us
 # to get the final linked binary with the bitcode embedded
 # via the lto-embed-bitcode flag
+# -Copt-level=1 is required for mem2reg, which GraalVM needs
+[build]
 rustflags = [
+    "-Copt-level=1",
     "-Zemit-thin-lto=no",
     "-Clinker-plugin-lto",
     "-Clink-arg=-Wl,--plugin-opt=-lto-embed-bitcode=optimized",
