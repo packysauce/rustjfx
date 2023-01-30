@@ -5,8 +5,6 @@
 # via the lto-embed-bitcode flag
 rustflags = [
     "-Zemit-thin-lto=no",
-    "-Cembed-bitcode=yes",
-    "-Clinker=clang",
     "-Clinker-plugin-lto",
     "-Clink-arg=-Wl,--plugin-opt=-lto-embed-bitcode=optimized",
 ]
