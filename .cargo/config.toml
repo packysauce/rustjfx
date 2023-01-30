@@ -1,2 +1,16 @@
 [build]
-rustflags = ["--emit=llvm-bc"]
+# https://github.com/rust-lang/rust/issues/84395
+# using the unstable flag emit-thin-lto=no allows us
+# to get the final linked binary with the bitcode embedded
+# via the lto-embed-bitcode flag
+rustflags = [
+    "-Zemit-thin-lto=no",
+    "-Cembed-bitcode=yes",
+    "-Clinker=clang",
+    "-Clinker-plugin-lto",
+    "-Clink-arg=-Wl,--plugin-opt=-lto-embed-bitcode=optimized",
+]
+
+[alias]
+lli = ["make", "lli"]
+b = 'build'

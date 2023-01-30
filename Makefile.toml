@@ -1,27 +1,6 @@
-[tasks.add-bitcode]
-condition = { fail_message = "Already has bitcode" }
-condition_script = [
-    "objdump -h target/debug/main -j .llvmbc && exit 1 || exit 0",
-]
-description = "Add bitcode to .llvmbc ELF section"
-script = '''
-exe=${CARGO_MAKE_CRATE_TARGET_DIRECTORY}/main
-bc="$(find target/${CARGO_MAKE_CARGO_PROFILE}/deps -samefile $exe).bc"
-objcopy \
-    --add-section .llvmbc=$bc \
-    --set-section-flags .llvmbc=noload,contents,data,readonly \
-    $exe
-'''
-
-[tasks.post-build]
-dependencies = ["add-bitcode"]
-
-[tasks.run]
+[tasks.lli]
+dependencies = ["build"]
 script = "lli --lib $(rustc --print sysroot)/lib/libstd*.so target/debug/${@}"
-
-# we need to run cargo first, then we need to run objcopy for putting the .bc
-# files into the sections
-# hence, override the default build task
 
 [tasks.end]
 # Runs after any make tasks, lets use it to stitch together all the .bc files to whatever we built
