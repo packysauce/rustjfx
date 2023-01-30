@@ -12,11 +12,12 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "GitHub.copilot-nightly",
-        "GitHub.copilot-labs",
-        "tamasfe.even-better-toml",
-        "rust-lang.rust-analyzer"
-      ]
+		"GitHub.copilot-nightly",
+		"GitHub.copilot-labs",
+		"tamasfe.even-better-toml",
+		"rust-lang.rust-analyzer",
+		"timonwong.shellcheck"
+	]
     }
   }
 }
